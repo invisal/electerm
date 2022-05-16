@@ -1,12 +1,16 @@
 {
   "presets": [
     "@babel/preset-react",
-    ["@babel/env", {
-      "targets": {
-        "chrome": 87,
-        "node": "current"
+    "@babel/preset-typescript",
+    [
+      "@babel/env",
+      {
+        "targets": {
+          "chrome": 87,
+          "node": "current"
+        }
       }
-    }]
+    ]
   ],
   "plugins": [
     ["@babel/plugin-proposal-decorators", { "legacy": true }],
