@@ -1,10 +1,10 @@
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const pug = require('./pug')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const pug = require("./pug");
 module.exports = [
   {
-    test: /\.jsx?$/,
+    test: /\.(js|jsx|ts|tsx)$/,
     exclude: /node_modules/,
-    use: ['babel-loader?cacheDirectory']
+    use: ["babel-loader?cacheDirectory"],
   },
   {
     test: /\.styl$/,
@@ -14,16 +14,16 @@ module.exports = [
         options: {
           // you can specify a publicPath here
           // by default it use publicPath in webpackOptions.output
-          publicPath: '../'
-        }
+          publicPath: "../",
+        },
       },
-      'css-loader',
-      'stylus-loader'
-    ]
+      "css-loader",
+      "stylus-loader",
+    ],
   },
   {
     test: /\.less$/,
-    use: 'null-loader'
+    use: "null-loader",
   },
   {
     test: /xterm\.css$/,
@@ -33,29 +33,33 @@ module.exports = [
         options: {
           // you can specify a publicPath here
           // by default it use publicPath in webpackOptions.output
-          publicPath: '../'
-        }
+          publicPath: "../",
+        },
       },
-      'css-loader'
-    ]
+      "css-loader",
+    ],
+  },
+  {
+    test: /\.module\.css$/,
+    use: ["style-loader", "css-loader"],
   },
   {
     test: /\.(png|jpg|svg)$/,
-    use: ['url-loader?limit=1&name=images/[name].[ext]']
+    use: ["url-loader?limit=1&name=images/[name].[ext]"],
   },
   {
     test: /\.pug$/,
     use: [
-      'file-loader?name=index.html',
-      'concat-loader',
-      'extract-loader',
+      "file-loader?name=index.html",
+      "concat-loader",
+      "extract-loader",
       {
-        loader: 'html-loader',
+        loader: "html-loader",
         options: {
-          sources: false
-        }
+          sources: false,
+        },
       },
-      pug
-    ]
-  }
-]
+      pug,
+    ],
+  },
+];

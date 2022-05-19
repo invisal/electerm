@@ -22,6 +22,7 @@ import { tabWidth, tabMargin, extraTabWidth, windowControlWidth } from '../../co
 import createName from '../../common/create-title'
 import WindowControl from './window-control'
 import BookmarksList from '../sidebar/bookmark-select'
+import OtherTabItem from './OtherTabItem'
 
 const { prefix } = window
 const e = prefix('tabs')
@@ -248,6 +249,7 @@ export default class Tabs extends React.Component {
           </div>
         </div>
         <div className='app-drag' />
+        <OtherTabItem />
         <WindowControl
           isMaximized={this.props.isMaximized}
           closeApp={this.props.store.exit}

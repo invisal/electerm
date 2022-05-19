@@ -1,0 +1,28 @@
+:root {
+  --tabs-background: #252526;
+  --tab-active-background: #1e1e1e;
+  --tab-background: #2d2d2d;
+  --tab-text: #fff;
+}
+
+.tab_item_wrapper {
+  background: var(--tab-background);
+  color: var(--tab-text);
+  padding: 10px;
+  cursor: pointer;
+}
+
+.tab_item_wrapper_active {
+  background: var(--tab-active-background);
+}
+
+.tab_wrapper {
+  background: var(--tabs-background);
+  margin-left: 48px;
+  display: flex;
+}
+
+.tab_filler {
+  flex-grow: 1;
+  -webkit-app-region: drag;
+}

@@ -1,67 +1,69 @@
-require('dotenv').config()
-const AntdDayjsWebpackPlugin = require('@electerm/antd-dayjs-webpack-plugin')
-const { identity } = require('lodash')
-const path = require('path')
-const { env } = require('./common')
-const isProd = env === 'production'
-const {
-  extractTextPlugin1,
-  stylusSettingPlugin
-} = require('./plugins')
-const devServer = require('./dev-server')
-const rules = require('./rules')
-const prod = require('./production')
+require("dotenv").config();
+const AntdDayjsWebpackPlugin = require("@electerm/antd-dayjs-webpack-plugin");
+const { identity } = require("lodash");
+const path = require("path");
+const { env } = require("./common");
+const isProd = env === "production";
+const { extractTextPlugin1, stylusSettingPlugin } = require("./plugins");
+const devServer = require("./dev-server");
+const rules = require("./rules");
+const prod = require("./production");
 
 let config = {
-  mode: 'development',
+  mode: "development",
+  resolve: {
+    fallback: {
+      fs: false,
+    },
+  },
   entry: {
-    electerm: './src/client/entry/index.jsx',
-    basic: './src/client/entry/basic.jsx',
-    index: './src/client/views/index.pug',
-    worker: './src/client/entry/worker.js'
+    electerm: "./src/client/entry/index.jsx",
+    basic: "./src/client/entry/basic.jsx",
+    index: "./src/client/views/index.pug",
+    worker: "./src/client/entry/worker.js",
   },
   output: {
-    path: path.resolve(__dirname, '../work/app/assets'),
-    filename: 'js/[name].js',
-    publicPath: '/',
-    chunkFilename: 'js/[name].js',
-    libraryTarget: 'var',
-    library: 'Et'
+    path: path.resolve(__dirname, "../work/app/assets"),
+    filename: "js/[name].js",
+    publicPath: "/",
+    chunkFilename: "js/[name].js",
+    libraryTarget: "var",
+    library: "Et",
   },
   externals: {
-    react: 'React',
-    'react-dom': 'ReactDOM',
-    lodash: '_'
+    react: "React",
+    "react-dom": "ReactDOM",
+    lodash: "_",
   },
-  target: 'web',
+  target: "web",
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.json'],
+    extensions: [".js", ".jsx", ".ts", ".json", ".tsx", ".css"],
     alias: {
-      client: path.resolve(__dirname, '../src/client'),
-      node_modules: path.resolve(__dirname, '../node_modules'),
-      'app-common': path.resolve(__dirname, '../src/app/common')
-    }
+      client: path.resolve(__dirname, "../src/client"),
+      node_modules: path.resolve(__dirname, "../node_modules"),
+      "app-common": path.resolve(__dirname, "../src/app/common"),
+    },
   },
   resolveLoader: {
     modules: [
-      path.resolve(__dirname, '../src/client/loaders'),
-      path.join(process.cwd(), 'node_modules')
-    ]
+      path.resolve(__dirname, "../src/client/loaders"),
+      path.join(process.cwd(), "node_modules"),
+    ],
   },
   module: {
-    rules
+    rules,
   },
-  devtool: 'source-map',
+  devtool: "source-map",
   plugins: [
     stylusSettingPlugin,
     extractTextPlugin1,
-    new AntdDayjsWebpackPlugin()
+    new AntdDayjsWebpackPlugin(),
   ].filter(identity),
-  devServer
-}
+  devServer,
+};
 
 if (isProd) {
-  config = prod(config)
+  config = prod(config);
 }
 
-module.exports = config
+module.exports = config;
